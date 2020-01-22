@@ -1,6 +1,6 @@
 const { createStore } = require("./redux");
 const { todosReducer } = require("./reducer");
-const { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } = require("./actionTypes");
+const { addTodo, removeTodo, toggleTodo } = require("./actionCreators");
 
 const store = createStore(todosReducer);
 
@@ -8,40 +8,5 @@ const store = createStore(todosReducer);
 store.subscribe(() => console.log(store.getState()));
 
 // test code to check if todosReducer works
-store.dispatch({
-  type: ADD_TODO,
-  todo: {
-    id: 0,
-    name: "Learn Redux",
-    completed: false
-  }
-});
-
-store.dispatch({
-  type: ADD_TODO,
-  todo: {
-    id: 1,
-    name: "Implement Redux",
-    completed: false
-  }
-});
-
-store.dispatch({
-  type: TOGGLE_TODO,
-  id: 0
-});
-
-store.dispatch({
-  type: TOGGLE_TODO,
-  id: 1
-});
-
-store.dispatch({
-  type: REMOVE_TODO,
-  id: 0
-});
-
-store.dispatch({
-  type: REMOVE_TODO,
-  id: 1
-});
+store.dispatch(addTodo("Learn Redux"));
+store.dispatch(addTodo("Implement Redux"));
