@@ -33,6 +33,9 @@ const createStore = reducer => {
   // dispatches an action to the reducer which return the new state
   const dispatch = action => {
     state = reducer(state, action);
+
+    // now that the state is updated, we need to invoke all callbacks
+    listeners.forEach(listener => listener());
   };
 
   return {
