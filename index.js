@@ -1,7 +1,12 @@
 const { createStore } = require("./redux");
 const { rootReducer } = require("./reducer");
-const { addTodo, removeTodo, toggleTodo } = require("./actionCreators");
-const { ADD_GOAL, REMOVE_GOAL } = require("./actionTypes");
+const {
+  addTodo,
+  removeTodo,
+  toggleTodo,
+  addGoal,
+  removeGoal
+} = require("./actionCreators");
 
 const store = createStore(rootReducer);
 
@@ -12,15 +17,4 @@ store.subscribe(() => console.log(store.getState()));
 store.dispatch(addTodo("Learn Redux"));
 store.dispatch(addTodo("Implement Redux"));
 
-store.dispatch({
-  type: ADD_GOAL,
-  goal: {
-    name: "Join Tradeling",
-    id: 0
-  }
-});
-
-store.dispatch({
-  type: REMOVE_GOAL,
-  id: 0
-});
+store.dispatch(addGoal("Join Tradeling"));
