@@ -1,3 +1,4 @@
+// generates a random id to be used for todos and goals
 const generateId = () =>
   Math.random()
     .toString(36)

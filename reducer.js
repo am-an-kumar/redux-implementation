@@ -1,5 +1,20 @@
-const { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } = require("./actionTypes");
+const {
+  ADD_TODO,
+  REMOVE_TODO,
+  TOGGLE_TODO,
+  ADD_GOAL,
+  REMOVE_GOAL
+} = require("./actionTypes");
 
+// root reducer
+const rootReducer = (state = {}, action) => {
+  return {
+    todos: todosReducer(state.todos, action),
+    goals: goalsReducer(state.goals, action)
+  };
+};
+
+// reducer for TODO actions
 const todosReducer = (state = [], action) => {
   if (action.type === ADD_TODO) {
     return state.concat([action.todo]);
@@ -16,6 +31,17 @@ const todosReducer = (state = [], action) => {
   }
 };
 
+// reducer for GOAL actions
+const goalsReducer = (state = [], action) => {
+  if (action.type === ADD_GOAL) {
+    return state.concat([action.goal]);
+  } else if (action.type === REMOVE_GOAL) {
+    return state.filter(goal => goal.id !== action.id);
+  } else {
+    return state;
+  }
+};
+
 module.exports = {
-  todosReducer
+  rootReducer
 };

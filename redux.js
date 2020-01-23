@@ -5,7 +5,6 @@
     2. a way to get the state
     3. a way to get notified when the state of the store changes    
     4. a way to update the state of the store
-
 */
 
 // creates store and returns api to interact with it
