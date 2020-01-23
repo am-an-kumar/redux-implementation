@@ -5,7 +5,7 @@ const {
   ADD_GOAL,
   REMOVE_GOAL
 } = require("./actionTypes");
-const { generateId } = require("./library");
+const { generateId } = require("../util/library");
 
 // action creators for todo actions
 const addTodo = name => ({

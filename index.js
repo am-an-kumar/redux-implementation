@@ -1,12 +1,12 @@
-const { createStore } = require("./redux");
-const { rootReducer } = require("./reducer");
+const { createStore } = require("./impl/redux");
+const { rootReducer } = require("./store/reducer");
 const {
   addTodo,
   removeTodo,
   toggleTodo,
   addGoal,
   removeGoal
-} = require("./actionCreators");
+} = require("./store/actionCreators");
 
 const store = createStore(rootReducer);
 
@@ -14,7 +14,8 @@ const store = createStore(rootReducer);
 store.subscribe(() => console.log(store.getState()));
 
 // test code to check if todosReducer works
-store.dispatch(addTodo("Learn Redux"));
-store.dispatch(addTodo("Implement Redux"));
+// store.dispatch(addTodo("Learn Redux"));
+// store.dispatch(addTodo("Implement Redux"));
 
 store.dispatch(addGoal("Join Tradeling"));
+store.dispatch(addGoal("Complete react nanodegree"));
