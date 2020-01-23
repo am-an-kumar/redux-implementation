@@ -5,6 +5,8 @@
     2. a way to get the state
     3. a way to get notified when the state of the store changes    
     4. a way to update the state of the store
+
+    implement combineReducers() and applyMiddlewares()
 */
 
 // creates store and returns api to interact with it
@@ -44,6 +46,19 @@ const createStore = reducer => {
   };
 };
 
+// returns a root reducer function by combining multiple reducers
+const combineReducers = reducersObject => {
+  return (state = {}, action) => {
+    const newState = {};
+    for (key in reducersObject) {
+      newState[key] = reducersObject[key](state[key], action);
+    }
+
+    return newState;
+  };
+};
+
 module.exports = {
-  createStore
+  createStore,
+  combineReducers
 };

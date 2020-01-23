@@ -43,5 +43,7 @@ const goalsReducer = (state = [], action) => {
 };
 
 module.exports = {
-  rootReducer
+  rootReducer,
+  todosReducer,
+  goalsReducer
 };
