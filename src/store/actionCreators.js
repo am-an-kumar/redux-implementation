@@ -4,6 +4,7 @@ import {
   TOGGLE_TODO,
   ADD_GOAL,
   REMOVE_GOAL,
+  TOGGLE_GOAL,
 } from './actionTypes'
 import { generateId } from '../util/library'
 
@@ -33,6 +34,7 @@ const addGoal = name => ({
   goal: {
     id: generateId(),
     name,
+    completed: false,
   },
 })
 
@@ -41,4 +43,9 @@ const removeGoal = id => ({
   id,
 })
 
-export { addTodo, removeTodo, toggleTodo, addGoal, removeGoal }
+const toggleGoal = id => ({
+  type: TOGGLE_GOAL,
+  id,
+})
+
+export { addTodo, removeTodo, toggleTodo, addGoal, removeGoal, toggleGoal }
