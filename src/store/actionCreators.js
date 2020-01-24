@@ -3,9 +3,9 @@ const {
   REMOVE_TODO,
   TOGGLE_TODO,
   ADD_GOAL,
-  REMOVE_GOAL
-} = require("./actionTypes");
-const { generateId } = require("../util/library");
+  REMOVE_GOAL,
+} = require('./actionTypes')
+const { generateId } = require('../util/library')
 
 // action creators for todo actions
 const addTodo = name => ({
@@ -13,38 +13,38 @@ const addTodo = name => ({
   todo: {
     id: generateId(),
     name,
-    completed: false
-  }
-});
+    completed: false,
+  },
+})
 
 const removeTodo = id => ({
   type: REMOVE_TODO,
-  id
-});
+  id,
+})
 
 const toggleTodo = id => ({
   type: TOGGLE_TODO,
-  id
-});
+  id,
+})
 
 // action creators for goal actions
 const addGoal = name => ({
   type: ADD_GOAL,
   goal: {
     id: generateId(),
-    name
-  }
-});
+    name,
+  },
+})
 
 const removeGoal = id => ({
   type: REMOVE_GOAL,
-  id
-});
+  id,
+})
 
 module.exports = {
   addTodo,
   removeTodo,
   toggleTodo,
   addGoal,
-  removeGoal
-};
+  removeGoal,
+}
