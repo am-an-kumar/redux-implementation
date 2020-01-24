@@ -58,7 +58,4 @@ const combineReducers = reducersObject => {
   }
 }
 
-module.exports = {
-  createStore,
-  combineReducers,
-}
+export { createStore, combineReducers }

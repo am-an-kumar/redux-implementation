@@ -1,10 +1,10 @@
-const {
+import {
   ADD_TODO,
   REMOVE_TODO,
   TOGGLE_TODO,
   ADD_GOAL,
   REMOVE_GOAL,
-} = require('./actionTypes')
+} from './actionTypes'
 
 // reducer for TODO actions
 const todos = (state = [], action) => {
@@ -34,7 +34,4 @@ const goals = (state = [], action) => {
   }
 }
 
-module.exports = {
-  todos,
-  goals,
-}
+export { todos, goals }

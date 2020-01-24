@@ -1,11 +1,11 @@
-const {
+import {
   ADD_TODO,
   REMOVE_TODO,
   TOGGLE_TODO,
   ADD_GOAL,
   REMOVE_GOAL,
-} = require('./actionTypes')
-const { generateId } = require('../util/library')
+} from './actionTypes'
+import { generateId } from '../util/library'
 
 // action creators for todo actions
 const addTodo = name => ({
@@ -41,10 +41,4 @@ const removeGoal = id => ({
   id,
 })
 
-module.exports = {
-  addTodo,
-  removeTodo,
-  toggleTodo,
-  addGoal,
-  removeGoal,
-}
+export { addTodo, removeTodo, toggleTodo, addGoal, removeGoal }

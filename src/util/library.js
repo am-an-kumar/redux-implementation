@@ -4,6 +4,4 @@ const generateId = () =>
     .toString(36)
     .substring(2) + new Date().getTime().toString(36)
 
-module.exports = {
-  generateId,
-}
+export { generateId }
