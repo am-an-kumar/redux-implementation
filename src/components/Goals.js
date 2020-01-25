@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { addGoal, removeGoal, toggleGoal } from '../store/actionCreators'
+import UserInput from './UserInput'
 
 class Goals extends Component {
   state = {
     value: '',
   }
 
-  handleInputChange = event => {
+  handleInputOnChange = event => {
     const value = event.target.value
     this.setState({
       value,
     })
   }
 
-  handleKeyDown = (event, id) => {
+  handleInputKeyDown = ({ keyCode }) => {
+    if (keyCode === 13) {
+      this.addGoalItem()
+    }
+  }
+
+  handleItemKeyDown = (event, id) => {
     if (event.keyCode === 13) {
       this.toggleGoalItem(id)
     }
@@ -39,20 +46,16 @@ class Goals extends Component {
   render() {
     const { goals } = this.props
     const { value } = this.state
+    const { handleInputOnChange, addGoalItem } = this
 
     return (
       <div className='container'>
         <h2 className='heading'>Goals</h2>
-        <div className='add-form'>
-          <input type='text' value={value} onChange={this.handleInputChange} />
-          <button
-            type='submit'
-            disabled={value ? false : true}
-            onClick={this.addGoalItem}
-          >
-            Add
-          </button>
-        </div>
+        <UserInput
+          value={value}
+          onChangeHandler={handleInputOnChange}
+          onClickHandler={addGoalItem}
+        />
         {goals.length === 0 ? (
           <p className='info-no-item'>No goals added yet!!!</p>
         ) : (
@@ -68,7 +71,7 @@ class Goals extends Component {
                     textDecoration: goal.completed ? 'line-through' : 'none',
                   }}
                   onClick={() => this.toggleGoalItem(goal.id)}
-                  onKeyDown={event => this.handleKeyDown(event, goal.id)}
+                  onKeyDown={event => this.handleItemKeyDown(event, goal.id)}
                 >
                   {goal.name}
                 </span>

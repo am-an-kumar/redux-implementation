@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { addTodo, removeTodo, toggleTodo } from '../store/actionCreators'
+import UserInput from './UserInput'
 
 class Todos extends Component {
   state = {
     value: '',
   }
 
-  handleInputChange = event => {
+  handleInputOnChange = event => {
     const value = event.target.value
     this.setState({
       value,
     })
   }
 
-  handleKeyDown = (event, id) => {
+  handleInputKeyDown = ({ keyCode }) => {
+    if (keyCode === 13) {
+      this.addTodoItem()
+    }
+  }
+
+  handleItemKeyDown = (event, id) => {
     if (event.keyCode === 13) {
       this.toggleTodoItem(id)
     }
@@ -39,22 +46,18 @@ class Todos extends Component {
   render() {
     const { todos } = this.props
     const { value } = this.state
+    const { handleInputOnChange, addTodoItem } = this
 
     return (
       <div className='container'>
         <h2 className='heading'>Todos</h2>
-        <div className='add-form'>
-          <input type='text' value={value} onChange={this.handleInputChange} />
-          <button
-            type='submit'
-            disabled={value ? false : true}
-            onClick={this.addTodoItem}
-          >
-            Add
-          </button>
-        </div>
+        <UserInput
+          value={value}
+          onChangeHandler={handleInputOnChange}
+          onClickHandler={addTodoItem}
+        />
         {todos.length === 0 ? (
-          <p className='info-no-item'>No todo item added yet!!!</p>
+          <p className='info-no-item'>No todos added yet!!!</p>
         ) : (
           <ul className='list'>
             {todos.map(todo => (
@@ -68,7 +71,7 @@ class Todos extends Component {
                     textDecoration: todo.completed ? 'line-through' : 'none',
                   }}
                   onClick={() => this.toggleTodoItem(todo.id)}
-                  onKeyDown={event => this.handleKeyDown(event, todo.id)}
+                  onKeyDown={event => this.handleItemKeyDown(event, todo.id)}
                 >
                   {todo.name}
                 </span>

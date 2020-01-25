@@ -76,7 +76,6 @@ body {
   align-items: center;
   height: 32px;
   border: 1px solid #ccc;
-  border-radius: 10px;
 }
 
 .add-form > input {
@@ -84,13 +83,18 @@ body {
   text-align: center;
   height: 100%;
   border: none;
-  border-radius: 10px;
 }
 
 .add-form > button {
   height: 100%;
   border: none;
-  border-radius: 0px 10px 10px 0px;
+  outline: none;
+  background-color: rgba(39, 197, 95, 0.8);
+  color: white;
+}
+
+.add-form > button:focus {
+  background-color: rgb(29, 185, 84, 1);
 }
 
 .info-no-item {
