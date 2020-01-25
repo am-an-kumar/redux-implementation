@@ -53,29 +53,33 @@ class Todos extends Component {
             Add
           </button>
         </div>
-        <ul className='list'>
-          {todos.map(todo => (
-            <li key={todo.id} className='list-item'>
-              <span
-                role='switch'
-                aria-checked={todo.completed}
-                tabIndex='0'
-                className='text'
-                style={{
-                  textDecoration: todo.completed ? 'line-through' : 'none',
-                }}
-                onClick={() => this.toggleGoalItem(todo.id)}
-                onKeyDown={event => this.handleKeyDown(event, todo.id)}
-              >
-                {todo.name}
-              </span>
-              <button
-                className='remove'
-                onClick={() => this.removeTodoItem(todo.id)}
-              ></button>
-            </li>
-          ))}
-        </ul>
+        {todos.length === 0 ? (
+          <p className='info-no-item'>No todo item added yet!!!</p>
+        ) : (
+          <ul className='list'>
+            {todos.map(todo => (
+              <li key={todo.id} className='list-item'>
+                <span
+                  role='switch'
+                  aria-checked={todo.completed}
+                  tabIndex='0'
+                  className='text'
+                  style={{
+                    textDecoration: todo.completed ? 'line-through' : 'none',
+                  }}
+                  onClick={() => this.toggleGoalItem(todo.id)}
+                  onKeyDown={event => this.handleKeyDown(event, todo.id)}
+                >
+                  {todo.name}
+                </span>
+                <button
+                  className='remove'
+                  onClick={() => this.removeTodoItem(todo.id)}
+                ></button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     )
   }

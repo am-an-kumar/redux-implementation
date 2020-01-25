@@ -7,6 +7,13 @@ class Goals extends Component {
     value: '',
   }
 
+  handleInputChange = event => {
+    const value = event.target.value
+    this.setState({
+      value,
+    })
+  }
+
   handleKeyDown = (event, id) => {
     if (event.keyCode === 13) {
       this.toggleGoalItem(id)
@@ -46,29 +53,33 @@ class Goals extends Component {
             Add
           </button>
         </div>
-        <ul className='list'>
-          {goals.map(goal => (
-            <li key={goal.id} className='list-item'>
-              <span
-                role='switch'
-                aria-checked={goal.completed}
-                tabIndex='0'
-                className='text'
-                style={{
-                  textDecoration: goal.completed ? 'line-through' : 'none',
-                }}
-                onClick={() => this.toggleGoalItem(goal.id)}
-                onKeyDown={event => this.handleKeyDown(event, goal.id)}
-              >
-                {goal.name}
-              </span>
-              <button
-                className='remove'
-                onClick={() => this.removeGoalItem(goal.id)}
-              ></button>
-            </li>
-          ))}
-        </ul>
+        {goals.length === 0 ? (
+          <p className='info-no-item'>No goals added yet!!!</p>
+        ) : (
+          <ul className='list'>
+            {goals.map(goal => (
+              <li key={goal.id} className='list-item'>
+                <span
+                  role='switch'
+                  aria-checked={goal.completed}
+                  tabIndex='0'
+                  className='text'
+                  style={{
+                    textDecoration: goal.completed ? 'line-through' : 'none',
+                  }}
+                  onClick={() => this.toggleGoalItem(goal.id)}
+                  onKeyDown={event => this.handleKeyDown(event, goal.id)}
+                >
+                  {goal.name}
+                </span>
+                <button
+                  className='remove'
+                  onClick={() => this.removeGoalItem(goal.id)}
+                ></button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     )
   }

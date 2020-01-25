@@ -23,6 +23,7 @@ body {
   display: flex;
   flex-flow: column nowrap;
   margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 .heading {
@@ -77,4 +78,10 @@ body {
 .add-form > input {
   flex-grow: 1;
   text-align: center;
+}
+
+.info-no-item {
+  text-align: center;
+  text-transform: capitalize;
+  font-style: italic;
 }
