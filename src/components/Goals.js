@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { addGoal, removeGoal, toggleGoal } from '../store/actionCreators'
 import UserInput from './UserInput'
+import List from './List'
 
 class Goals extends Component {
   state = {
@@ -46,7 +47,14 @@ class Goals extends Component {
   render() {
     const { goals } = this.props
     const { value } = this.state
-    const { handleInputOnChange, addGoalItem } = this
+    const {
+      handleInputOnChange,
+      addGoalItem,
+      handleInputKeyDown,
+      removeGoalItem,
+      toggleGoalItem,
+      handleItemKeyDown,
+    } = this
 
     return (
       <div className='container'>
@@ -55,34 +63,14 @@ class Goals extends Component {
           value={value}
           onChangeHandler={handleInputOnChange}
           onClickHandler={addGoalItem}
+          onKeyDownHandler={handleInputKeyDown}
         />
-        {goals.length === 0 ? (
-          <p className='info-no-item'>No goals added yet!!!</p>
-        ) : (
-          <ul className='list'>
-            {goals.map(goal => (
-              <li key={goal.id} className='list-item'>
-                <span
-                  role='switch'
-                  aria-checked={goal.completed}
-                  tabIndex='0'
-                  className='text'
-                  style={{
-                    textDecoration: goal.completed ? 'line-through' : 'none',
-                  }}
-                  onClick={() => this.toggleGoalItem(goal.id)}
-                  onKeyDown={event => this.handleItemKeyDown(event, goal.id)}
-                >
-                  {goal.name}
-                </span>
-                <button
-                  className='remove'
-                  onClick={() => this.removeGoalItem(goal.id)}
-                ></button>
-              </li>
-            ))}
-          </ul>
-        )}
+        <List
+          items={goals}
+          removeItem={removeGoalItem}
+          toggleItem={toggleGoalItem}
+          handleItemKeyDown={handleItemKeyDown}
+        />
       </div>
     )
   }

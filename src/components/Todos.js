@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { addTodo, removeTodo, toggleTodo } from '../store/actionCreators'
 import UserInput from './UserInput'
+import List from './List'
 
 class Todos extends Component {
   state = {
@@ -46,7 +47,14 @@ class Todos extends Component {
   render() {
     const { todos } = this.props
     const { value } = this.state
-    const { handleInputOnChange, addTodoItem } = this
+    const {
+      handleInputOnChange,
+      addTodoItem,
+      removeTodoItem,
+      toggleTodoItem,
+      handleItemKeyDown,
+      handleInputKeyDown,
+    } = this
 
     return (
       <div className='container'>
@@ -54,35 +62,15 @@ class Todos extends Component {
         <UserInput
           value={value}
           onChangeHandler={handleInputOnChange}
+          onKeyDownHandler={handleInputKeyDown}
           onClickHandler={addTodoItem}
         />
-        {todos.length === 0 ? (
-          <p className='info-no-item'>No todos added yet!!!</p>
-        ) : (
-          <ul className='list'>
-            {todos.map(todo => (
-              <li key={todo.id} className='list-item'>
-                <span
-                  role='switch'
-                  aria-checked={todo.completed}
-                  tabIndex='0'
-                  className='text'
-                  style={{
-                    textDecoration: todo.completed ? 'line-through' : 'none',
-                  }}
-                  onClick={() => this.toggleTodoItem(todo.id)}
-                  onKeyDown={event => this.handleItemKeyDown(event, todo.id)}
-                >
-                  {todo.name}
-                </span>
-                <button
-                  className='remove'
-                  onClick={() => this.removeTodoItem(todo.id)}
-                ></button>
-              </li>
-            ))}
-          </ul>
-        )}
+        <List
+          items={todos}
+          removeItem={removeTodoItem}
+          toggleItem={toggleTodoItem}
+          handleItemKeyDown={handleItemKeyDown}
+        />
       </div>
     )
   }
