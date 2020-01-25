@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Todos from './Todos'
 import Goals from './Goals'
+import { hot } from 'react-hot-loader'
 
 class App extends Component {
   state = {
@@ -10,28 +11,33 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const unsubsribe = this.props.store.subscribe(() => {
-      const { todos, goals } = this.props.store.getState()
+    const { subscribe, getState } = this.props.store
+
+    const unsubscribe = subscribe(() => {
+      const { todos, goals } = getState()
       this.setState({
         todos,
         goals,
       })
     })
+
     this.setState({
-      unsubsribe,
+      unsubscribe,
     })
   }
 
   componentWillUnmount() {
-    this.state.unsubsribe()
+    // unsubscribing from state changes
+    this.state.unsubscribe()
   }
 
   render() {
     const { todos, goals } = this.state
+    const { dispatch } = this.props.store
     return (
       <>
-        <Todos list={todos} />
-        <Goals list={goals} />
+        <Todos todos={todos} dispatch={dispatch} />
+        <Goals goals={goals} dispatch={dispatch} />
       </>
     )
   }
@@ -45,4 +51,4 @@ App.propTypes = {
   }),
 }
 
-export default App
+export default hot(module)(App)
