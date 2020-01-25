@@ -51,7 +51,10 @@ class Todos extends Component {
           {todos.map(todo => (
             <li key={todo.id} className='list-item'>
               <span className='text'>{todo.name}</span>
-              <span className='remove'></span>
+              <button
+                className='remove'
+                onClick={() => this.removeTodoItem(todo.id)}
+              ></button>
             </li>
           ))}
         </ul>

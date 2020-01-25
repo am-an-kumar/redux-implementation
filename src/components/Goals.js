@@ -51,7 +51,10 @@ class Goals extends Component {
           {goals.map(goal => (
             <li key={goal.id} className='list-item'>
               <span className='text'>{goal.name}</span>
-              <span className='remove'></span>
+              <button
+                className='remove'
+                onClick={() => this.removeGoalItem(goal.id)}
+              ></button>
             </li>
           ))}
         </ul>
