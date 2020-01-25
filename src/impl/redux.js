@@ -10,7 +10,7 @@
 */
 
 // creates store and returns api to interact with it
-const createStore = reducer => {
+const createStore = (reducer, middlewares) => {
   // state of the store
   let state
 
@@ -31,12 +31,28 @@ const createStore = reducer => {
     }
   }
 
-  // dispatches an action to the reducer which return the new state
-  const dispatch = action => {
+  const dispatch_no_middleware = action => {
     state = reducer(state, action)
-
-    // now that the state is updated, we need to invoke all callbacks
     listeners.forEach(listener => listener())
+  }
+
+  // dispatches an action to the reducer which returns the new state
+  const dispatch = action => {
+    // calling middlewares prior to calling the reducer
+    for (let i = 0; i < middlewares.length; i++) {
+      let next_arg = undefined
+      if (i !== middlewares.length - 1) {
+        next_arg = middlewares[i + 1]
+      } else {
+        next_arg = dispatch_no_middleware
+      }
+      middlewares[i](
+        { getState: getState, dispatch: dispatch_no_middleware },
+        next_arg,
+        action,
+      )
+    }
+    dispatch_no_middleware(action)
   }
 
   return {
@@ -58,4 +74,8 @@ const combineReducers = reducersObject => {
   }
 }
 
-export { createStore, combineReducers }
+const applyMiddleware = (...middlewares) => {
+  return middlewares
+}
+
+export { createStore, combineReducers, applyMiddleware }
