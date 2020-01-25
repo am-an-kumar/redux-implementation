@@ -54,6 +54,7 @@ body {
   text-align: left;
   flex-grow: 1;
   padding-left: 10px;
+  line-height: 32px;
 }
 
 .list-item .remove {
@@ -73,11 +74,23 @@ body {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  height: 32px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .add-form > input {
   flex-grow: 1;
   text-align: center;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+.add-form > button {
+  height: 100%;
+  border: none;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .info-no-item {

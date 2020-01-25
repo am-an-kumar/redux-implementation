@@ -67,7 +67,7 @@ class Todos extends Component {
                   style={{
                     textDecoration: todo.completed ? 'line-through' : 'none',
                   }}
-                  onClick={() => this.toggleGoalItem(todo.id)}
+                  onClick={() => this.toggleTodoItem(todo.id)}
                   onKeyDown={event => this.handleKeyDown(event, todo.id)}
                 >
                   {todo.name}
