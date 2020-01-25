@@ -14,6 +14,12 @@ class Todos extends Component {
     })
   }
 
+  handleKeyDown = (event, id) => {
+    if (event.keyCode === 13) {
+      this.toggleTodoItem(id)
+    }
+  }
+
   addTodoItem = () => {
     const { value } = this.state
     this.setState({
@@ -50,7 +56,19 @@ class Todos extends Component {
         <ul className='list'>
           {todos.map(todo => (
             <li key={todo.id} className='list-item'>
-              <span className='text'>{todo.name}</span>
+              <span
+                role='switch'
+                aria-checked={todo.completed}
+                tabIndex='0'
+                className='text'
+                style={{
+                  textDecoration: todo.completed ? 'line-through' : 'none',
+                }}
+                onClick={() => this.toggleGoalItem(todo.id)}
+                onKeyDown={event => this.handleKeyDown(event, todo.id)}
+              >
+                {todo.name}
+              </span>
               <button
                 className='remove'
                 onClick={() => this.removeTodoItem(todo.id)}
