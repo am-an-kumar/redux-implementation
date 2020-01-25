@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { addGoal, removeGoal, toggleGoal } from '../store/actionCreators'
-import UserInput from './UserInput'
-import List from './List'
+import UserInput from './shared/UserInput'
+import List from './shared/List'
 
 class Goals extends Component {
   state = {
