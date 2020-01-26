@@ -5,6 +5,7 @@ import {
   ADD_GOAL,
   REMOVE_GOAL,
   TOGGLE_GOAL,
+  INITIALISE_DATA,
 } from './actionTypes'
 
 // reducer for TODO actions
@@ -22,6 +23,9 @@ const todos = (state = [], action) => {
           ? Object.assign(todo, { completed: !todo.completed })
           : todo,
       )
+
+    case INITIALISE_DATA:
+      return action.todos
 
     default:
       return state
@@ -44,9 +48,21 @@ const goals = (state = [], action) => {
           : goal,
       )
 
+    case INITIALISE_DATA:
+      return action.goals
+
     default:
       return state
   }
 }
 
-export { todos, goals }
+const loading = (state = true, action) => {
+  switch (action.type) {
+    case INITIALISE_DATA:
+      return false
+    default:
+      return state
+  }
+}
+
+export { todos, goals, loading }

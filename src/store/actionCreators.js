@@ -5,6 +5,7 @@ import {
   ADD_GOAL,
   REMOVE_GOAL,
   TOGGLE_GOAL,
+  INITIALISE_DATA,
 } from './actionTypes'
 import { generateId } from '../util/library'
 
@@ -48,4 +49,19 @@ const toggleGoal = id => ({
   id,
 })
 
-export { addTodo, removeTodo, toggleTodo, addGoal, removeGoal, toggleGoal }
+// action creator for fetching initial data
+const initializeData = (todos, goals) => ({
+  type: INITIALISE_DATA,
+  todos,
+  goals,
+})
+
+export {
+  addTodo,
+  removeTodo,
+  toggleTodo,
+  addGoal,
+  removeGoal,
+  toggleGoal,
+  initializeData,
+}

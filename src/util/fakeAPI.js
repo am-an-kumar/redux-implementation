@@ -127,7 +127,7 @@ const deleteGoal = id =>
     }, 500)
   })
 
-const toggleTodo = id =>
+const toggleSaveTodo = id =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fail()) {
@@ -143,7 +143,7 @@ const toggleTodo = id =>
     }, 500)
   })
 
-const toggleGoal = id =>
+const toggleSaveGoal = id =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fail()) {
@@ -166,6 +166,6 @@ export {
   saveGoal,
   deleteTodo,
   deleteGoal,
-  toggleTodo,
-  toggleGoal,
+  toggleSaveTodo,
+  toggleSaveGoal,
 }

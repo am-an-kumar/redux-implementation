@@ -4,46 +4,20 @@ import Todos from './Todos'
 import Goals from './Goals'
 import { hot } from 'react-hot-loader'
 import { fetchGoals, fetchTodos } from '../util/fakeAPI'
+import { initializeData } from '../store/actionCreators'
 
 class App extends Component {
-  state = {
-    todos: [],
-    goals: [],
-    loading: true,
-  }
-
   componentDidMount() {
-    const { subscribe, getState } = this.props.store
-
-    const unsubscribe = subscribe(() => {
-      const { todos, goals } = getState()
-      this.setState({
-        todos,
-        goals,
-      })
-    })
-
-    this.setState({
-      unsubscribe,
-    })
+    this.props.store.subscribe(() => this.forceUpdate())
 
     Promise.all([fetchTodos(), fetchGoals()]).then(data => {
-      this.setState({
-        todos: data[0],
-        goals: data[1],
-        loading: false,
-      })
+      this.props.store.dispatch(initializeData(data[0], data[1]))
     })
-  }
-
-  componentWillUnmount() {
-    // unsubscribing from state changes
-    this.state.unsubscribe()
   }
 
   render() {
-    const { todos, goals, loading } = this.state
-    const { dispatch } = this.props.store
+    const { dispatch, getState } = this.props.store
+    const { todos, goals, loading } = getState()
     return (
       <>
         <Todos todos={todos} dispatch={dispatch} loading={loading} />
