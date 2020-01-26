@@ -45,7 +45,7 @@ class Goals extends Component {
   }
 
   render() {
-    const { goals } = this.props
+    const { goals, loading } = this.props
     const { value } = this.state
     const {
       handleInputOnChange,
@@ -70,6 +70,7 @@ class Goals extends Component {
           removeItem={removeGoalItem}
           toggleItem={toggleGoalItem}
           handleItemKeyDown={handleItemKeyDown}
+          loading={loading}
         />
       </div>
     )
@@ -79,6 +80,7 @@ class Goals extends Component {
 Goals.propTypes = {
   goals: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 }
 
 export default Goals

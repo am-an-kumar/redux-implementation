@@ -31,6 +31,7 @@ class App extends Component {
       this.setState({
         todos: data[0],
         goals: data[1],
+        loading: false,
       })
     })
   }
@@ -41,12 +42,12 @@ class App extends Component {
   }
 
   render() {
-    const { todos, goals } = this.state
+    const { todos, goals, loading } = this.state
     const { dispatch } = this.props.store
     return (
       <>
-        <Todos todos={todos} dispatch={dispatch} />
-        <Goals goals={goals} dispatch={dispatch} />
+        <Todos todos={todos} dispatch={dispatch} loading={loading} />
+        <Goals goals={goals} dispatch={dispatch} loading={loading} />
       </>
     )
   }

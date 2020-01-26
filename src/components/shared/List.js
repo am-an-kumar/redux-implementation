@@ -1,9 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ListItem from './ListItem'
+import Loading from './Loading'
 
-const List = ({ items, toggleItem, removeItem, handleItemKeyDown }) => {
-  return items.length === 0 ? (
+const List = ({
+  items,
+  toggleItem,
+  removeItem,
+  handleItemKeyDown,
+  loading,
+}) => {
+  return loading ? (
+    <Loading />
+  ) : items.length === 0 ? (
     <p className='info-no-item'>No todos added yet!!!</p>
   ) : (
     <ul className='list'>
@@ -25,6 +34,7 @@ List.propTypes = {
   toggleItem: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
   handleItemKeyDown: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 }
 
 export default List

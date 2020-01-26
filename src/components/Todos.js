@@ -45,7 +45,7 @@ class Todos extends Component {
   }
 
   render() {
-    const { todos } = this.props
+    const { todos, loading } = this.props
     const { value } = this.state
     const {
       handleInputOnChange,
@@ -66,6 +66,7 @@ class Todos extends Component {
           onClickHandler={addTodoItem}
         />
         <List
+          loading={loading}
           items={todos}
           removeItem={removeTodoItem}
           toggleItem={toggleTodoItem}
@@ -79,6 +80,7 @@ class Todos extends Component {
 Todos.propTypes = {
   todos: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 }
 
 export default Todos
