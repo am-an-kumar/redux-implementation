@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { addTodo, removeTodo, toggleTodo } from '../store/actionCreators'
 import UserInput from './shared/UserInput'
 import List from './shared/List'
-// import { saveTodo, deleteTodo, toggleSaveTodo, saveGoal } from '../util/fakeAPI'
+import { saveTodo, deleteTodo, toggleSaveTodo } from '../util/fakeAPI'
 
 class Todos extends Component {
   state = {
@@ -31,18 +31,36 @@ class Todos extends Component {
 
   addTodoItem = () => {
     const { value } = this.state
-    this.setState({
-      value: '',
-    })
-    this.props.dispatch(addTodo(value))
+    saveTodo(value)
+      .then(todo => {
+        this.props.dispatch(addTodo(todo))
+        this.setState({
+          value: '',
+        })
+      })
+      .catch(() => {
+        console.error('Error adding todo item')
+      })
   }
 
-  removeTodoItem = id => {
-    this.props.dispatch(removeTodo(id))
+  removeTodoItem = todo => {
+    this.props.dispatch(removeTodo(todo.id))
+    deleteTodo(todo.id)
+      .then(() => console.log('Todo removed: ', todo))
+      .catch(() => {
+        this.props.dispatch(addTodo(todo))
+        console.log('Error removing todo item')
+      })
   }
 
   toggleTodoItem = id => {
     this.props.dispatch(toggleTodo(id))
+    toggleSaveTodo(id)
+      .then(() => console.log('Todo toggled'))
+      .catch(() => {
+        this.props.dispatch(toggleTodo(id))
+        console.error('Error toggling the todo')
+      })
   }
 
   render() {

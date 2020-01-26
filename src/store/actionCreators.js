@@ -7,16 +7,11 @@ import {
   TOGGLE_GOAL,
   INITIALISE_DATA,
 } from './actionTypes'
-import { generateId } from '../util/library'
 
 // action creators for todo actions
-const addTodo = name => ({
+const addTodo = todo => ({
   type: ADD_TODO,
-  todo: {
-    id: generateId(),
-    name,
-    completed: false,
-  },
+  todo: todo,
 })
 
 const removeTodo = id => ({
@@ -30,13 +25,9 @@ const toggleTodo = id => ({
 })
 
 // action creators for goal actions
-const addGoal = name => ({
+const addGoal = goal => ({
   type: ADD_GOAL,
-  goal: {
-    id: generateId(),
-    name,
-    completed: false,
-  },
+  goal: goal,
 })
 
 const removeGoal = id => ({

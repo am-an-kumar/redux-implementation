@@ -16,7 +16,7 @@ const ListItem = ({ item, toggleItem, removeItem, handleItemKeyDown }) => (
     >
       {item.name}
     </span>
-    <button className='remove' onClick={() => removeItem(item.id)}></button>
+    <button className='remove' onClick={() => removeItem(item)}></button>
   </li>
 )
 

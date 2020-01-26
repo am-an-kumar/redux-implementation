@@ -110,7 +110,7 @@ const deleteTodo = id =>
         reject()
       } else {
         todos = todos.filter(todo => todo.id !== id)
-        resolve(todos)
+        resolve()
       }
     }, 500)
   })
@@ -122,7 +122,7 @@ const deleteGoal = id =>
         reject()
       } else {
         goals = goals.filter(goal => goal.id !== id)
-        resolve(goals)
+        resolve()
       }
     }, 500)
   })
@@ -138,7 +138,7 @@ const toggleSaveTodo = id =>
             ? Object.assign(todo, { completed: !todo.completed })
             : todo,
         )
-        resolve(todos)
+        resolve()
       }
     }, 500)
   })
@@ -154,7 +154,7 @@ const toggleSaveGoal = id =>
             ? Object.assign(goal, { completed: !goal.completed })
             : goal,
         )
-        resolve(goals)
+        resolve()
       }
     }, 500)
   })

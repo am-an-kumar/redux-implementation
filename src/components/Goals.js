@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { addGoal, removeGoal, toggleGoal } from '../store/actionCreators'
 import UserInput from './shared/UserInput'
 import List from './shared/List'
+import { saveGoal, deleteGoal, toggleSaveGoal } from '../util/fakeAPI'
 
 class Goals extends Component {
   state = {
@@ -30,18 +31,32 @@ class Goals extends Component {
 
   addGoalItem = () => {
     const { value } = this.state
-    this.setState({
-      value: '',
-    })
-    this.props.dispatch(addGoal(value))
+
+    saveGoal(value)
+      .then(goal => {
+        this.props.dispatch(addGoal(goal))
+      })
+      .catch(() => console.error('Error occured while adding goal!!!'))
   }
 
-  removeGoalItem = id => {
-    this.props.dispatch(removeGoal(id))
+  removeGoalItem = goal => {
+    this.props.dispatch(removeGoal(goal.id))
+    deleteGoal(goal.id)
+      .then(() => console.log('Goal removed'))
+      .catch(() => {
+        this.props.dispatch(addGoal(goal))
+        console.error('Error removing goal')
+      })
   }
 
   toggleGoalItem = id => {
     this.props.dispatch(toggleGoal(id))
+    toggleSaveGoal(id)
+      .then(() => console.log('Goal toggled successfully'))
+      .catch(() => {
+        this.props.dispatch(toggleGoal(id))
+        console.error('Error toggling goal')
+      })
   }
 
   render() {
