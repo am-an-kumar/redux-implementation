@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { addTodo, removeTodo, toggleTodo } from '../store/actionCreators'
+import {
+  addTodoAction,
+  removeTodoAction,
+  toggleTodoAction,
+} from '../store/actionCreators'
 import UserInput from './shared/UserInput'
 import List from './shared/List'
-import { saveTodo, deleteTodo, toggleSaveTodo } from '../util/fakeAPI'
+import { addTodoAPI, removeTodoAPI, toggleTodoAPI } from '../util/fakeAPI'
 
 class Todos extends Component {
   state = {
@@ -31,9 +35,9 @@ class Todos extends Component {
 
   addTodoItem = () => {
     const { value } = this.state
-    saveTodo(value)
+    addTodoAPI(value)
       .then(todo => {
-        this.props.dispatch(addTodo(todo))
+        this.props.dispatch(addTodoAction(todo))
         this.setState({
           value: '',
         })
@@ -44,21 +48,21 @@ class Todos extends Component {
   }
 
   removeTodoItem = todo => {
-    this.props.dispatch(removeTodo(todo.id))
-    deleteTodo(todo.id)
+    this.props.dispatch(removeTodoAction(todo.id))
+    removeTodoAPI(todo.id)
       .then(() => console.log('Todo removed: ', todo))
       .catch(() => {
-        this.props.dispatch(addTodo(todo))
+        this.props.dispatch(addTodoAction(todo))
         console.log('Error removing todo item')
       })
   }
 
   toggleTodoItem = id => {
-    this.props.dispatch(toggleTodo(id))
-    toggleSaveTodo(id)
+    this.props.dispatch(toggleTodoAction(id))
+    toggleTodoAPI(id)
       .then(() => console.log('Todo toggled'))
       .catch(() => {
-        this.props.dispatch(toggleTodo(id))
+        this.props.dispatch(toggleTodoAction(id))
         console.error('Error toggling the todo')
       })
   }

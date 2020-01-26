@@ -50,7 +50,7 @@ let todos = [
 ]
 
 // fetches all todos
-const fetchTodos = () =>
+const fetchTodosAPI = () =>
   // eslint-disable-next-line no-unused-vars
   new Promise((resolve, reject) => {
     setTimeout(function() {
@@ -59,7 +59,7 @@ const fetchTodos = () =>
   })
 
 // fetches all goals
-const fetchGoals = () =>
+const fetchGoalsAPI = () =>
   // eslint-disable-next-line no-unused-vars
   new Promise((resolve, reject) => {
     setTimeout(function() {
@@ -67,7 +67,7 @@ const fetchGoals = () =>
     }, 1500)
   })
 
-const saveTodo = name =>
+const addTodoAPI = name =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       const todo = {
@@ -85,7 +85,7 @@ const saveTodo = name =>
     }, 500)
   })
 
-const saveGoal = name =>
+const addGoalAPI = name =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       const goal = {
@@ -103,7 +103,7 @@ const saveGoal = name =>
     }, 500)
   })
 
-const deleteTodo = id =>
+const removeTodoAPI = id =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fail()) {
@@ -115,7 +115,7 @@ const deleteTodo = id =>
     }, 500)
   })
 
-const deleteGoal = id =>
+const removeGoalAPI = id =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fail()) {
@@ -127,7 +127,7 @@ const deleteGoal = id =>
     }, 500)
   })
 
-const toggleSaveTodo = id =>
+const toggleTodoAPI = id =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fail()) {
@@ -143,7 +143,7 @@ const toggleSaveTodo = id =>
     }, 500)
   })
 
-const toggleSaveGoal = id =>
+const toggleGoalAPI = id =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fail()) {
@@ -160,12 +160,12 @@ const toggleSaveGoal = id =>
   })
 
 export {
-  fetchTodos,
-  fetchGoals,
-  saveTodo,
-  saveGoal,
-  deleteTodo,
-  deleteGoal,
-  toggleSaveTodo,
-  toggleSaveGoal,
+  fetchTodosAPI,
+  fetchGoalsAPI,
+  addTodoAPI,
+  addGoalAPI,
+  removeTodoAPI,
+  removeGoalAPI,
+  toggleTodoAPI,
+  toggleGoalAPI,
 }

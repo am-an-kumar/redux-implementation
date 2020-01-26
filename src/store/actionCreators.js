@@ -9,50 +9,50 @@ import {
 } from './actionTypes'
 
 // action creators for todo actions
-const addTodo = todo => ({
+const addTodoAction = todo => ({
   type: ADD_TODO,
   todo: todo,
 })
 
-const removeTodo = id => ({
+const removeTodoAction = id => ({
   type: REMOVE_TODO,
   id,
 })
 
-const toggleTodo = id => ({
+const toggleTodoAction = id => ({
   type: TOGGLE_TODO,
   id,
 })
 
 // action creators for goal actions
-const addGoal = goal => ({
+const addGoalAction = goal => ({
   type: ADD_GOAL,
   goal: goal,
 })
 
-const removeGoal = id => ({
+const removeGoalAction = id => ({
   type: REMOVE_GOAL,
   id,
 })
 
-const toggleGoal = id => ({
+const toggleGoalAction = id => ({
   type: TOGGLE_GOAL,
   id,
 })
 
 // action creator for fetching initial data
-const initializeData = (todos, goals) => ({
+const initializeDataAction = (todos, goals) => ({
   type: INITIALISE_DATA,
   todos,
   goals,
 })
 
 export {
-  addTodo,
-  removeTodo,
-  toggleTodo,
-  addGoal,
-  removeGoal,
-  toggleGoal,
-  initializeData,
+  addTodoAction,
+  removeTodoAction,
+  toggleTodoAction,
+  addGoalAction,
+  removeGoalAction,
+  toggleGoalAction,
+  initializeDataAction,
 }

@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import Todos from './Todos'
 import Goals from './Goals'
 import { hot } from 'react-hot-loader'
-import { fetchGoals, fetchTodos } from '../util/fakeAPI'
-import { initializeData } from '../store/actionCreators'
+import { fetchGoalsAPI, fetchTodosAPI } from '../util/fakeAPI'
+import { initializeDataAction } from '../store/actionCreators'
 
 class App extends Component {
   componentDidMount() {
     this.props.store.subscribe(() => this.forceUpdate())
 
-    Promise.all([fetchTodos(), fetchGoals()]).then(data => {
-      this.props.store.dispatch(initializeData(data[0], data[1]))
+    // fetching initialData
+    Promise.all([fetchTodosAPI(), fetchGoalsAPI()]).then(data => {
+      this.props.store.dispatch(initializeDataAction(data[0], data[1]))
     })
   }
 
