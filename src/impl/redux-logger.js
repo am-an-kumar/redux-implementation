@@ -1,4 +1,11 @@
-// middleware like redux-logger. It is much simpler and will always log the state prior to and post state update. There is no configuration to modify what is logged. It is just a POC. Can implement all the redux-logger features, but it is better to use a well tested library like redux-logger.
+/*
+    Middleware for logging. It does the following:-
+    1. Creates a group with title being action.type
+    2. Logs state prior to action being dispatched
+    3. Calls the next middleware in chain by passing it the action, i.e. next(action). Generally logging is the last middleware in a chain, so it will mostly be dispatch(action)
+    4. Logs state after the state gets updated due to action
+
+*/
 
 const logger = store => next => action => {
   console.groupCollapsed(action.type)
