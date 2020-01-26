@@ -10,7 +10,7 @@
 */
 
 // creates store and returns api to interact with it
-const createStore = (reducer, middlewares) => {
+const createStore = (reducer, middlewares = []) => {
   // state of the store
   let state
 
@@ -41,18 +41,18 @@ const createStore = (reducer, middlewares) => {
     // calling middlewares prior to calling the reducer
     for (let i = 0; i < middlewares.length; i++) {
       let next_arg = undefined
-      if (i !== middlewares.length - 1) {
+      if (i < middlewares.length - 1) {
         next_arg = middlewares[i + 1]
       } else {
         next_arg = dispatch_no_middleware
       }
-      middlewares[i](
-        { getState: getState, dispatch: dispatch_no_middleware },
+      middlewares[i]({ getState: getState, dispatch: dispatch_no_middleware })(
         next_arg,
-        action,
-      )
+      )(action)
     }
-    dispatch_no_middleware(action)
+    if (middlewares.length === 0) {
+      dispatch_no_middleware(action)
+    }
   }
 
   return {
