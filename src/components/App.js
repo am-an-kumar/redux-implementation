@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import Todos from './Todos'
 import Goals from './Goals'
 import { hot } from 'react-hot-loader'
+import { fetchGoals, fetchTodos } from '../util/fakeAPI'
 
 class App extends Component {
   state = {
     todos: [],
     goals: [],
+    loading: true,
   }
 
   componentDidMount() {
@@ -23,6 +25,13 @@ class App extends Component {
 
     this.setState({
       unsubscribe,
+    })
+
+    Promise.all([fetchTodos(), fetchGoals()]).then(data => {
+      this.setState({
+        todos: data[0],
+        goals: data[1],
+      })
     })
   }
 
