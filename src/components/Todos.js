@@ -21,7 +21,7 @@ class Todos extends Component {
   }
 
   handleInputKeyDown = ({ keyCode }) => {
-    if (keyCode === 13) {
+    if (keyCode === 13 && this.state.value) {
       this.addTodoItem()
     }
   }

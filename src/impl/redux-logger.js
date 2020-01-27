@@ -8,7 +8,6 @@
 */
 
 const logger = store => next => action => {
-  console.log(action)
   console.groupCollapsed(action.type)
 
   // logging state prior to update
