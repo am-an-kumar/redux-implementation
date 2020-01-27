@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {
-  addGoalAction,
-  removeGoalAction,
-  toggleGoalAction,
-} from '../store/actionCreators'
 import UserInput from './shared/UserInput'
 import List from './shared/List'
-import { addGoalAPI, removeGoalAPI, toggleGoalAPI } from '../util/fakeAPI'
+import {
+  handleAddGoalAction,
+  handleRemoveGoalAction,
+  handleToggleGoalAction,
+} from '../store/actionHandlers'
 
 class Goals extends Component {
   state = {
@@ -35,33 +34,18 @@ class Goals extends Component {
 
   addGoalItem = () => {
     const { value } = this.state
-
-    addGoalAPI(value)
-      .then(goal => {
-        this.props.dispatch(addGoalAction(goal))
-      })
-      .catch(() => console.error('Error occured while adding goal!!!'))
+    this.props.dispatch(
+      handleAddGoalAction(value, () =>
+        this.setState({
+          value: '',
+        }),
+      ),
+    )
   }
 
-  removeGoalItem = goal => {
-    this.props.dispatch(removeGoalAction(goal.id))
-    removeGoalAPI(goal.id)
-      .then(() => console.log('Goal removed'))
-      .catch(() => {
-        this.props.dispatch(addGoalAction(goal))
-        console.error('Error removing goal')
-      })
-  }
+  removeGoalItem = goal => this.props.dispatch(handleRemoveGoalAction(goal.id))
 
-  toggleGoalItem = id => {
-    this.props.dispatch(toggleGoalAction(id))
-    toggleGoalAPI(id)
-      .then(() => console.log('Goal toggled successfully'))
-      .catch(() => {
-        this.props.dispatch(toggleGoalAction(id))
-        console.error('Error toggling goal')
-      })
-  }
+  toggleGoalItem = id => this.props.dispatch(handleToggleGoalAction(id))
 
   render() {
     const { goals, loading } = this.props
