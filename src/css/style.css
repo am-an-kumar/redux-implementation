@@ -19,6 +19,7 @@ body {
   flex-flow: column nowrap;
 }
 
+/* goal/todo container */
 .container {
   display: flex;
   flex-flow: column nowrap;
@@ -32,6 +33,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* goal/todo list */
 .list {
   list-style-type: none;
   padding-left: 0px;
@@ -69,6 +71,7 @@ body {
   background-color: transparent;
 }
 
+/* todo/goal addition form */
 .add-form {
   display: flex;
   flex-flow: row nowrap;
@@ -97,6 +100,7 @@ body {
   background-color: rgb(29, 185, 84, 1);
 }
 
+/* info display for goal/todo */
 .info-no-item {
   text-align: center;
   text-transform: capitalize;
@@ -110,4 +114,24 @@ body {
   background-image: url('../images/loading.svg');
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 550px) {
+  .container {
+    width: 500px;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #root {
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: start;
+  }
+  .container {
+    width: 420px !important;
+    border: none;
+    margin-top: 0px;
+  }
 }
