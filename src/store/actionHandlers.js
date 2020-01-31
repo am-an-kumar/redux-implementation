@@ -19,34 +19,37 @@ import {
   fetchGoalsAPI,
 } from '../util/fakeAPI'
 
+import { toast } from 'react-toastify'
+
 const handleAddTodoAction = (value, callback) => dispatch => {
   addTodoAPI(value)
     .then(todo => {
       dispatch(addTodoAction(todo))
       callback()
+      toast.success('Todo Added')
     })
     .catch(() => {
-      console.error('Error adding todo item')
+      toast.error('Error occured while adding todo. Please retry')
     })
 }
 
 const handleRemoveTodoAction = todo => dispatch => {
   dispatch(removeTodoAction(todo.id))
   removeTodoAPI(todo.id)
-    .then(() => console.log('Todo removed: ', todo))
+    .then(() => toast.success('Todo removed'))
     .catch(() => {
       dispatch(addTodoAction(todo))
-      console.error('Error removing todo item')
+      toast.error('Error occured while removing todo. Please retry')
     })
 }
 
 const handleToggleTodoAction = id => dispatch => {
   dispatch(toggleTodoAction(id))
   toggleTodoAPI(id)
-    .then(() => console.log('Todo toggled'))
+    .then(() => toast.success('Todo toggled'))
     .catch(() => {
       dispatch(toggleTodoAction(id))
-      console.error('Error toggling the todo')
+      toast.error('Error occured while toggling todo. Please retry')
     })
 }
 
@@ -56,27 +59,28 @@ const handleAddGoalAction = (value, callback) => dispatch => {
     .then(goal => {
       dispatch(addGoalAction(goal))
       callback()
+      toast.success('Goal Added')
     })
-    .catch(() => console.error('Error occured while adding goal!!!'))
+    .catch(() => toast.error('Error occured while removing goal. Please retry'))
 }
 
 const handleRemoveGoalAction = goal => dispatch => {
   dispatch(removeGoalAction(goal.id))
   removeGoalAPI(goal.id)
-    .then(() => console.log('Goal removed'))
+    .then(() => toast.success('Goal removed'))
     .catch(() => {
       dispatch(addGoalAction(goal))
-      console.error('Error removing goal')
+      toast.error('Error occured while removing goal. Please retry')
     })
 }
 
 const handleToggleGoalAction = id => dispatch => {
   dispatch(toggleGoalAction(id))
   toggleGoalAPI(id)
-    .then(() => console.log('Goal toggled successfully'))
+    .then(() => toast.success('Goal toggled'))
     .catch(() => {
       dispatch(toggleGoalAction(id))
-      console.error('Error toggling goal')
+      toast.error('Error occured while toggling goal. Please retry')
     })
 }
 
